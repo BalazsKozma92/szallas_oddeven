@@ -40,13 +40,13 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 function promptUser() {
-    rl.question('Adj meg egy string típusú változót: ', (expression) => {
-        if (typeof expression === 'string') {
-            if (expression.length == 0) {
+    rl.question('Adj meg egy string típusú paramétert, mely csak számokat, kötő,- és pluszjeleket tartalmazhat: ', (expression) => {
+        if (/^[-+0-9]+$/.test(expression)) {
+            if (expression.length === 0) {
                 console.log('A megadott érték hossza nem lehet 0.');
                 promptUser();
             }
-            else if (expression == '0') {
+            else if (expression === '0') {
                 console.log('A megadott érték nem lehet 0.');
                 promptUser();
             }
@@ -56,8 +56,8 @@ function promptUser() {
             }
         }
         else {
-            console.log('A megadott érték nem string típusú!');
-            rl.close();
+            console.log('A megadott érték csak számjegyeket, + és - karaktereket tartalmazhat!');
+            promptUser();
         }
     });
 }
